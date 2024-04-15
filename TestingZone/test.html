@@ -1,10 +1,59 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-	</head>
-	<body>
-		
-	</body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draggable Icon</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .icon {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: #3498db;
+            border-radius: 50%;
+            cursor: grab;
+        }
+    </style>
+</head>
+<body>
+    <div class="icon" id="draggableIcon"></div>
+
+    <script>
+        const icon = document.getElementById('draggableIcon');
+        let isDragging = false;
+        let offsetX, offsetY;
+
+        icon.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            offsetX = e.clientX - icon.getBoundingClientRect().left;
+            offsetY = e.clientY - icon.getBoundingClientRect().top;
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                const x = e.clientX - offsetX;
+                const y = e.clientY - offsetY;
+                icon.style.transform = `translate(${x}px, ${y}px)`;
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        // Add a link functionality (replace with your desired URL)
+        icon.addEventListener('click', () => {
+            window.location.href = 'https://your-link-here.com';
+        });
+    </script>
+</body>
 </html>
