@@ -34,14 +34,15 @@
 
         icon.addEventListener('mousedown', (e) => {
             isDragging = true;
-            offsetX = e.clientX - icon.getBoundingClientRect().left;
-            offsetY = e.clientY - icon.getBoundingClientRect().top;
+            const rect = icon.getBoundingClientRect();
+            offsetX = e.pageX - rect.left - rect.width / 2;
+            offsetY = e.pageY - rect.top - rect.height / 2;
         });
 
         document.addEventListener('mousemove', (e) => {
             if (isDragging) {
-                const x = e.clientX - offsetX;
-                const y = e.clientY - offsetY;
+                const x = e.pageX - offsetX;
+                const y = e.pageY - offsetY;
                 icon.style.transform = `translate(${x}px, ${y}px)`;
             }
         });
